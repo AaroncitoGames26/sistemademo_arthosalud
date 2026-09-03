@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ArthroSalud — Sistema de Gestión</title>
+<link rel="stylesheet" href="arthrosalud-dashboard.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="marca">
+    <div class="icono">AS</div>
+    <div>
+      <h1>Clínica de Traumatología</h1>
+      <p>ARTHROSALUD · MOVIMIENTO SIN DOLOR</p>
+    </div>
+  </div>
+  <button class="btn-menu-movil" id="btn-menu-movil" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  <div class="perfil" id="perfil">
+    <button class="usuario-btn" id="btn-perfil" aria-haspopup="true" aria-expanded="false">⚙ AMACEDO</button>
+    <div class="menu-perfil" id="menu-perfil" role="menu" aria-label="Cambiar perfil">
+      <button class="opcion-perfil seleccionado" data-rol="Administrador" role="menuitem">Administrador</button>
+      <button class="opcion-perfil" data-rol="Usuario" role="menuitem">Usuario</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar">
+    <div id="lista-nav"></div>
+  </nav>
+
+  <main id="contenido"></main>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+<footer class="statusbar" id="barra-estado">No tienes notificaciones pendientes</footer>
+
+<script src="arthrosalud-dashboard.js"></script>
+
+</body>
+</html>
