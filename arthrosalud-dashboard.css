@@ -607,6 +607,20 @@
   .caja-confirmacion strong{ display:block; margin-bottom:2px; }
   .btn-primario:disabled{ background:#91c9a8; cursor:not-allowed; }
 
+  /* CAJA NAV / ESTADO DE TURNO */
+  .caja-volver{ margin-bottom:14px; }
+  .caja-volver button{ background:none; border:none; color:var(--azul-700); cursor:pointer; font-size:12px; font-weight:700; padding:2px 0; border-bottom:1px dashed transparent; }
+  .caja-volver button:hover{ text-decoration:underline; border-bottom:1px dashed var(--azul-500); }
+  .caja-estado-turno{ display:flex; align-items:center; gap:12px; margin:6px 0 20px; padding:13px 15px; border-radius:9px; font-size:12px; }
+  .caja-estado-turno .dot{ width:11px; height:11px; border-radius:50%; flex-shrink:0; }
+  .caja-estado-turno .dot.on{ background:#1fb066; box-shadow:0 0 0 3px rgba(31,176,102,.15); }
+  .caja-estado-turno .dot.off{ background:#d1493b; box-shadow:0 0 0 3px rgba(209,73,59,.15); }
+  .caja-estado-turno strong{ display:block; margin-bottom:2px; }
+  .caja-estado-turno small{ opacity:.82; }
+  .caja-estado-turno.abierta{ border:1px solid #b9dfca; background:#eefaf2; color:#1c6b3c; }
+  .caja-estado-turno.cerrada{ border:1px solid #ecc9c4; background:#fdf1ef; color:#a03c30; }
+  .caja-estado-turno.cerrada .btn-primario{ margin-left:auto; }
+
   /* TOAST NOTIFICATIONS */
   .toast-container{ position:fixed; top:72px; right:24px; z-index:100; display:grid; gap:8px; pointer-events:none; }
   .toast{ pointer-events:auto; display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:8px; font-size:13px; font-weight:600; box-shadow:0 6px 18px rgba(15,42,74,.18); animation:toastIn .22s ease, toastOut .22s ease 2.8s forwards; max-width:380px; }

@@ -613,40 +613,9 @@
   .caja-confirmacion{ display:flex; align-items:center; gap:10px; margin-bottom:18px; padding:12px 14px; border:1px solid #b9dfca; border-radius:8px; background:#eefaf2; color:#217346; font-size:12px; }
   .caja-confirmacion strong{ display:block; margin-bottom:2px; }
   .btn-primario:disabled{ background:#91c9a8; cursor:not-allowed; }
-
-  /* TOAST NOTIFICATIONS */
-  .toast-container{ position:fixed; top:72px; right:24px; z-index:100; display:grid; gap:8px; pointer-events:none; }
-  .toast{ pointer-events:auto; display:flex; align-items:center; gap:10px; padding:12px 16px; border-radius:8px; font-size:13px; font-weight:600; box-shadow:0 6px 18px rgba(15,42,74,.18); animation:toastIn .22s ease, toastOut .22s ease 2.8s forwards; max-width:380px; }
-  .toast.exito{ background:#eefaf2; border:1px solid #b9dfca; color:#217346; }
-  .toast.error{ background:#fdeaea; border:1px solid #efb8b8; color:#bd3d3d; }
-  .toast.info{ background:#edf6fc; border:1px solid #c8deef; color:var(--azul-700); }
-  @keyframes toastIn{ from{ opacity:0; transform:translateX(30px); } to{ opacity:1; transform:translateX(0); } }
-  @keyframes toastOut{ from{ opacity:1; } to{ opacity:0; transform:translateX(30px); } }
-
-  /* VALIDACIÓN DE CAMPOS */
-  .campo-invalido input, .campo-invalido select{ border-color:#c93a3a !important; box-shadow:0 0 0 2px rgba(201,58,58,.12) !important; }
-  .campo-mensaje{ font-size:11px; color:#c93a3a; margin-top:3px; display:none; }
-  .campo-invalido .campo-mensaje{ display:block; }
-
-  /* CAJA - PAGO CONSUMO */
-  .pago-resumen{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0; }
-  .pago-resumen-item{ padding:14px; border:1px solid var(--gris-300); border-radius:8px; background:var(--gris-100); text-align:center; }
-  .pago-resumen-item span{ display:block; color:var(--gris-600); font-size:10px; text-transform:uppercase; letter-spacing:.04em; }
-  .pago-resumen-item strong{ display:block; margin-top:5px; color:var(--azul-700); font-size:18px; }
-  .pago-vuelto{ margin-top:12px; padding:12px 14px; border:1px solid #c8deef; border-radius:8px; background:#edf6fc; color:var(--azul-700); font-size:13px; font-weight:700; }
-  .pago-vuelto.negativo{ border-color:#efb8b8; background:#fdeaea; color:#bd3d3d; }
-  .paciente-busqueda-wrap{ position:relative; }
-  .paciente-busqueda-lista{ position:absolute; top:100%; left:0; right:0; max-height:180px; overflow-y:auto; background:var(--blanco); border:1px solid var(--gris-300); border-radius:0 0 7px 7px; box-shadow:0 6px 14px rgba(15,42,74,.12); z-index:15; display:none; }
-  .paciente-busqueda-lista.mostrar{ display:block; }
-  .paciente-busqueda-item{ padding:9px 12px; cursor:pointer; font-size:12px; border-bottom:1px solid var(--gris-100); }
-  .paciente-busqueda-item:hover{ background:var(--azul-100); }
-  .paciente-busqueda-item .pb-dni{ color:var(--gris-600); font-size:11px; }
-  .nota-credito-monto{ display:inline-block; padding:3px 9px; border-radius:20px; font-size:11px; font-weight:700; background:#fdeaea; color:#c93a3a; }
-  @media (max-width:700px){ .pago-resumen{ grid-template-columns:1fr; } }
   .caja-datos{ display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:20px; }
   .caja-dato{ padding:13px; border:1px solid var(--gris-300); border-radius:8px; background:var(--gris-100); }
   .caja-dato span{ display:block; color:var(--gris-600); font-size:10px; }.caja-dato strong{ display:block; margin-top:4px; color:var(--azul-700); font-size:17px; }
-  .comprobantes-vista{ max-width:1500px; }.comprobantes-filtros{ margin-bottom:16px; }.comprobantes-filtros .caja-form-actions{ flex-wrap:wrap; }.comprobantes-tabla-panel{ padding:18px 0; }.comprobantes-tabla{ min-width:1850px; font-size:10px; }.comprobantes-tabla th,.comprobantes-tabla td{ white-space:normal; vertical-align:middle; text-align:center; }.comprobantes-tabla th{ min-width:72px; }.comprobantes-tabla th:nth-child(4),.comprobantes-tabla th:nth-child(6),.comprobantes-tabla th:nth-child(7){ min-width:125px; }.comprobantes-tabla th:last-child,.comprobantes-tabla td:last-child{ min-width:65px; }
   @media (max-width:700px){ .caja-form-panel{ padding:15px; }.caja-titulo{ flex-direction:column; }.caja-datos{ grid-template-columns:1fr; }.caja-form-grid{ grid-template-columns:1fr 1fr; }.caja-form-grid .col-12{ grid-column:span 2; } }
   @media (max-width:420px){ .caja-form-grid{ grid-template-columns:1fr; }.caja-form-grid .col-12{ grid-column:span 1; }.caja-form-actions{ flex-direction:column-reverse; }.caja-form-actions button{ width:100%; } }
 
@@ -721,7 +690,6 @@
   <main id="contenido"></main>
 </div>
 
-<div class="toast-container" id="toast-container"></div>
 <footer class="statusbar" id="barra-estado">No tienes notificaciones pendientes</footer>
 
 <script>
@@ -737,7 +705,7 @@ const MODULOS = [
     ], estados:['Atendido','En espera','En espera','Atendido']},
 
   { id:'caja', nombre:'Caja', icono:'💵', color:'#e6f4ea', activo:true,
-    kpis:[['S/ 8,420','Ingresos hoy'],['12','Transacciones'],['S/ 60','Pendiente cobro']],
+    kpis:[['S/ 8,420','Ingresos hoy'],['32','Transacciones'],['S/ 150','Pendiente cobro']],
     columnas:['N° Comprobante','Paciente','Concepto','Monto','Estado'],
     filas:[
       ['B001-0231','María Torres','Consulta','S/ 80.00','ok'],
@@ -934,24 +902,6 @@ const MENU_SIG = [
   ]}
 ];
 
-const MENU_LABORATORIO = [
-  { nombre:'Laboratorio', items:[
-    {t:'Orden Laboratorio'}
-  ]},
-  { nombre:'Patología', items:[
-    {t:'Patología'}
-  ]}
-];
-
-const MENU_HONORARIOS = [
-  { nombre:'Ficheros', items:[
-    {t:'Honorarios'}
-  ]},
-  { nombre:'Procesar', items:[
-    {t:'Tipo Servicio'}, {t:'Excepciones'}
-  ]}
-];
-
 const MENU_EMERGENCIA = [
   { nombre:'Documentos', items:[
     {t:'Consentimientos Informados'}
@@ -1055,7 +1005,7 @@ function renderGridModulos(){
   const disponibles = modulosVisibles();
   renderNav(null);
   const esAdmin = ROL_ACTUAL === 'Administrador';
-  const kpis = esAdmin ? [['24','Pacientes atendidos hoy'],[formatoMoneda(totalIngresosCaja()),'Ingresos del día'],['4','Casos activos en emergencia'],['22 / 28','Camas ocupadas']] : [['5','Pacientes en espera'],['12','Citas programadas hoy'],['6','Camas disponibles'],[formatoMoneda(totalIngresosCaja()),'Cobrado en el turno']];
+  const kpis = esAdmin ? [['24','Pacientes atendidos hoy'],['S/ 8,420','Ingresos del día'],['4','Casos activos en emergencia'],['22 / 28','Camas ocupadas']] : [['5','Pacientes en espera'],['12','Citas programadas hoy'],['6','Camas disponibles'],['S/ 1,240','Cobrado en tu turno']];
   const acciones = esAdmin ? [{icono:'🧑‍💼',titulo:'Admitir paciente',detalle:'Registrar un nuevo ingreso',id:'admision'},{icono:'💵',titulo:'Registrar cobro',detalle:'Nueva transacción en caja',id:'caja'},{icono:'🚑',titulo:'Nuevo caso de emergencia',detalle:'Ingresar paciente a triaje',id:'emergencia'},{icono:'📦',titulo:'Nueva orden de compra',detalle:'Solicitar insumos a proveedor',id:'logistica'}] : [{icono:'🧑‍💼',titulo:'Admitir paciente',detalle:'Registrar un nuevo ingreso',id:'admision'},{icono:'💵',titulo:'Registrar cobro',detalle:'Nueva transacción en caja',id:'caja'},{icono:'🚑',titulo:'Registrar emergencia',detalle:'Ingresar paciente a triaje',id:'emergencia'}];
   const pendientes = esAdmin ? [['critico','Caso crítico en Emergencia:','Rosa Campos, triaje rojo','Emergencia'],['','Stock bajo:','Ibuprofeno 400mg requiere reposición','Farmacia'],['','Orden retrasada:','OC-0453 pendiente de recepción','Logística']] : [['critico','Caso crítico en Emergencia:','Rosa Campos, triaje rojo','Emergencia'],['','Paciente en espera:','Jorge Ramírez tiene cita a las 09:30','Admisión'],['','Cobro pendiente:','Lucía Peña, terapia','Caja']];
   contenido.innerHTML = `
@@ -1085,12 +1035,12 @@ function renderMenuInterno(m, menus){
         </div>
       `).join('')}
     </div>
-    <div class="vista-seccion" id="vista-seccion">${m.id === 'caja' ? renderResumenCaja(m) : m.id === 'farmacia' ? renderResumenFarmacia(m) : m.id === 'logistica' ? renderResumenLogistica(m) : m.id === 'prequirurgico' ? renderResumenPrequirurgico(m) : m.id === 'facturacion' ? renderResumenFacturacion(m) : m.id === 'sig' ? renderResumenSig(m) : m.id === 'laboratorio' ? renderResumenLaboratorio(m) : m.id === 'honorarios' ? renderResumenHonorarios(m) : renderResumenAdmision(m)}</div>
+    <div class="vista-seccion" id="vista-seccion">${m.id === 'caja' ? renderResumenCaja(m) : m.id === 'farmacia' ? renderResumenFarmacia(m) : m.id === 'logistica' ? renderResumenLogistica(m) : m.id === 'prequirurgico' ? renderResumenPrequirurgico(m) : m.id === 'facturacion' ? renderResumenFacturacion(m) : m.id === 'sig' ? renderResumenSig(m) : renderResumenAdmision(m)}</div>
   `;
 }
 
 function renderResumenCaja(m){
-  return `<div class="admision-resumen"><div class="migaja">Módulo <b>${m.nombre}</b></div><h3>Resumen de Caja</h3><p class="admision-resumen-intro">Control de pagos, comprobantes y operaciones del turno.</p><div class="admision-kpis"><div class="admision-kpi"><strong>${formatoMoneda(totalIngresosCaja())}</strong><span>Ingresos del día</span></div><div class="admision-kpi"><strong>${MOVIMIENTOS_CAJA.filter(x=>x.estado!=='Anulado' && String(x.concepto).indexOf('Nota Credito')!==0).length}</strong><span>Transacciones</span></div><div class="admision-kpi"><strong>${formatoMoneda(totalPendienteCobro())}</strong><span>Pendiente de cobro</span></div><div class="admision-kpi"><strong>${REGISTROS_CAJAS.filter(r=>r.estado==='ABIERTO').length}</strong><span>Cajas abiertas</span></div></div><div class="admision-columnas"><section class="admision-bloque"><div class="admision-bloque-header"><h4>Últimos movimientos</h4><span>Hoy</span></div>${MOVIMIENTOS_CAJA.slice(-3).reverse().map(x=>`<div class="admision-fila"><span class="admision-hora">${x.fecha.split(' ')[1]||''}</span><div><b>${x.paciente}</b><small>${x.concepto} · ${x.comprobante}</small></div><span class="admision-estado">${x.estado}</span></div>`).join('')}</section><section class="admision-bloque"><div class="admision-bloque-header"><h4>Requiere atención</h4><span>${MOVIMIENTOS_CAJA.filter(x=>x.estado==='Pendiente').length} pendientes</span></div>${MOVIMIENTOS_CAJA.filter(x=>x.estado==='Pendiente').slice(0,2).map(x=>`<div class="admision-alerta"><span class="admision-alerta-punto critico"></span><div><strong>Cobro pendiente</strong><small>${x.paciente} · ${x.concepto} · ${formatoMoneda(x.monto)}</small></div></div>`).join('')}<div class="admision-alerta"><span class="admision-alerta-punto"></span><div><strong>Cierre de caja próximo</strong><small>Caja principal · faltan 45 minutos</small></div></div></section></div><div class="admision-accesos"><button class="admision-acceso" data-seccion="Registrar">Registrar pago</button><button class="admision-acceso" data-seccion="Registro Y Pago">Registro y pago</button><button class="admision-acceso" data-seccion="Nota De Crédito">Nota de crédito</button><button class="admision-acceso" data-seccion="Apertura">Aperturar caja</button></div></div>`;
+  return `<div class="admision-resumen"><div class="migaja">Módulo <b>${m.nombre}</b></div><h3>Resumen de Caja</h3><p class="admision-resumen-intro">Control de pagos, comprobantes y operaciones del turno.</p><div class="admision-kpis"><div class="admision-kpi"><strong>S/ 8,420</strong><span>Ingresos del día</span></div><div class="admision-kpi"><strong>32</strong><span>Transacciones</span></div><div class="admision-kpi"><strong>S/ 150</strong><span>Pendiente de cobro</span></div><div class="admision-kpi"><strong>3</strong><span>Cajas abiertas</span></div></div><div class="admision-columnas"><section class="admision-bloque"><div class="admision-bloque-header"><h4>Últimos movimientos</h4><span>Hoy</span></div><div class="admision-fila"><span class="admision-hora">09:12</span><div><b>María Torres</b><small>Consulta · B001-0231</small></div><span class="admision-estado">Pagado</span></div><div class="admision-fila"><span class="admision-hora">09:28</span><div><b>Jorge Ramírez</b><small>Rayos X · B001-0232</small></div><span class="admision-estado">Pagado</span></div><div class="admision-fila"><span class="admision-hora">09:44</span><div><b>Lucía Peña</b><small>Terapia · B001-0233</small></div><span class="admision-estado pendiente">Pendiente</span></div></section><section class="admision-bloque"><div class="admision-bloque-header"><h4>Requiere atención</h4><span>2 pendientes</span></div><div class="admision-alerta"><span class="admision-alerta-punto critico"></span><div><strong>Cobro pendiente</strong><small>Lucía Peña · Terapia · S/ 60.00</small></div></div><div class="admision-alerta"><span class="admision-alerta-punto"></span><div><strong>Cierre de caja próximo</strong><small>Caja principal · faltan 45 minutos</small></div></div></section></div><div class="admision-accesos"><button class="admision-acceso" data-seccion="Registrar">Registrar pago</button><button class="admision-acceso" data-seccion="Registro Y Pago">Registro y pago</button><button class="admision-acceso" data-seccion="Comprobantes">Comprobantes</button><button class="admision-acceso" data-seccion="Medios De Pago">Medios de pago</button></div></div>`;
 }
 
 function renderResumenLogistica(m){
@@ -1099,14 +1049,6 @@ function renderResumenLogistica(m){
 
 function renderResumenPrequirurgico(m){
   return `<div class="admision-resumen"><div class="migaja">Módulo <b>${m.nombre}</b></div><h3>Resumen Pre Quirúrgico</h3><p class="admision-resumen-intro">Seguimiento de evaluaciones y aptitud de pacientes para cirugía.</p><div class="admision-kpis"><div class="admision-kpi"><strong>5</strong><span>Evaluaciones de hoy</span></div><div class="admision-kpi"><strong>2</strong><span>Pacientes aptos</span></div><div class="admision-kpi"><strong>1</strong><span>Observados</span></div><div class="admision-kpi"><strong>3</strong><span>Cirugías próximas</span></div></div><div class="admision-columnas"><section class="admision-bloque"><div class="admision-bloque-header"><h4>Evaluaciones pendientes</h4><span>Hoy</span></div><div class="admision-fila"><span class="admision-hora">09:30</span><div><b>Pedro León</b><small>Reemplazo de cadera · Pre anestesia</small></div><span class="admision-estado pendiente">Pendiente</span></div><div class="admision-fila"><span class="admision-hora">10:15</span><div><b>Rosa Campos</b><small>Cirugía prevista · Riesgo cardiológico</small></div><span class="admision-estado pendiente">En revisión</span></div></section><section class="admision-bloque"><div class="admision-bloque-header"><h4>Accesos rápidos</h4><span>Preoperatorio</span></div><div class="admision-alerta"><span class="admision-alerta-punto"></span><div><strong>Riesgo Cardiológico</strong><small>Revisar evaluaciones cardiovasculares</small></div></div><div class="admision-alerta"><span class="admision-alerta-punto"></span><div><strong>Pre Anestesia</strong><small>Completar evaluaciones pendientes</small></div></div></section></div><div class="admision-accesos"><button class="admision-acceso" data-seccion="Riesgo Cardiológico">Riesgo cardiológico</button><button class="admision-acceso" data-seccion="Pre Anestesia">Pre anestesia</button></div></div>`;
-}
-
-function renderResumenHonorarios(m){
-  return `<div class="admision-resumen"><div class="migaja">Módulo <b>${m.nombre}</b></div><h3>Resumen de Honorarios</h3><p class="admision-resumen-intro">Seguimiento de liquidaciones y pagos de profesionales.</p><div class="admision-kpis"><div class="admision-kpi"><strong>S/ 42,800</strong><span>Por liquidar</span></div><div class="admision-kpi"><strong>18</strong><span>Profesionales</span></div><div class="admision-kpi"><strong>3</strong><span>Pendientes de revisión</span></div><div class="admision-kpi"><strong>12</strong><span>Servicios configurados</span></div></div><div class="admision-columnas"><section class="admision-bloque"><div class="admision-bloque-header"><h4>Liquidaciones pendientes</h4><span>Agosto 2026</span></div><div class="admision-fila"><span class="admision-hora">Dra. Vidal</span><div><b>Ortopedia</b><small>64 atenciones · S/ 9,850</small></div><span class="admision-estado pendiente">Revisar</span></div><div class="admision-fila"><span class="admision-hora">Dr. Salazar</span><div><b>Traumatología</b><small>86 atenciones · S/ 12,400</small></div><span class="admision-estado pendiente">Por liquidar</span></div></section><section class="admision-bloque"><div class="admision-bloque-header"><h4>Accesos rápidos</h4><span>Honorarios</span></div><div class="admision-alerta"><span class="admision-alerta-punto"></span><div><strong>Tipo de servicio</strong><small>Revisar tarifas configuradas</small></div></div><div class="admision-alerta"><span class="admision-alerta-punto"></span><div><strong>Excepciones</strong><small>Validar reglas especiales</small></div></div></section></div><div class="admision-accesos"><button class="admision-acceso" data-seccion="Honorarios">Ver honorarios</button><button class="admision-acceso" data-seccion="Tipo Servicio">Tipos de servicio</button><button class="admision-acceso" data-seccion="Excepciones">Excepciones</button></div></div>`;
-}
-
-function renderResumenLaboratorio(m){
-  return `<div class="admision-resumen"><div class="migaja">Módulo <b>${m.nombre}</b></div><h3>Resumen de Laboratorio</h3><p class="admision-resumen-intro">Seguimiento de órdenes, muestras y resultados de laboratorio y patología.</p><div class="admision-kpis"><div class="admision-kpi"><strong>31</strong><span>Muestras de hoy</span></div><div class="admision-kpi"><strong>4</strong><span>Resultados críticos</span></div><div class="admision-kpi"><strong>27</strong><span>Resultados entregados</span></div><div class="admision-kpi"><strong>6</strong><span>Órdenes pendientes</span></div></div><div class="admision-columnas"><section class="admision-bloque"><div class="admision-bloque-header"><h4>Órdenes pendientes</h4><span>Hoy</span></div><div class="admision-fila"><span class="admision-hora">09:00</span><div><b>Iván Cortez</b><small>Radiografía / análisis · LAB-2403</small></div><span class="admision-estado pendiente">En revisión</span></div><div class="admision-fila"><span class="admision-hora">09:15</span><div><b>Nadia Ruiz</b><small>Perfil lipídico · LAB-2402</small></div><span class="admision-estado pendiente">En proceso</span></div></section><section class="admision-bloque"><div class="admision-bloque-header"><h4>Accesos rápidos</h4><span>Laboratorio</span></div><div class="admision-alerta"><span class="admision-alerta-punto critico"></span><div><strong>Resultado crítico</strong><small>Revisar valores de Iván Cortez</small></div></div><div class="admision-alerta"><span class="admision-alerta-punto"></span><div><strong>Patología pendiente</strong><small>2 muestras en análisis</small></div></div></section></div><div class="admision-accesos"><button class="admision-acceso" data-seccion="Orden Laboratorio">Órdenes de laboratorio</button><button class="admision-acceso" data-seccion="Patología">Patología</button></div></div>`;
 }
 
 function renderResumenSig(m){
@@ -1273,33 +1215,6 @@ function renderSigSeccion(seccion, menuPadre){
   barraEstado.textContent=`SIG › ${menuPadre} › ${seccion}`;
 }
 
-function renderLaboratorioSeccion(seccion, menuPadre){
-  const datos = {
-    'Orden Laboratorio': {descripcion:'Registra y consulta las órdenes de exámenes de laboratorio.', columnas:['ORDEN','PACIENTE','EXAMEN','FECHA','PRIORIDAD','ESTADO'], filas:[['LAB-2401','María Torres','Hemograma completo','02/09/2026','Normal','Disponible'],['LAB-2402','Nadia Ruiz','Perfil lipídico','02/09/2026','Normal','En proceso'],['LAB-2403','Iván Cortez','Radiografía / análisis','02/09/2026','Urgente','Requiere revisión']]},
-    'Patología': {descripcion:'Gestiona las solicitudes y resultados de estudios de patología.', columnas:['SOLICITUD','PACIENTE','ESTUDIO','MUESTRA','FECHA','ESTADO'], filas:[['PAT-081','Ana Fuentes','Biopsia de tejido','Recepcionada','02/09/2026','En análisis'],['PAT-080','Pedro León','Estudio histopatológico','Procesada','01/09/2026','Resultado listo']]}
-  }[seccion];
-  const vista=document.getElementById('vista-seccion');
-  const filas=datos.filas.map(fila=>`<tr>${fila.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
-  vista.innerHTML=`<div class="caja-vista"><div class="migaja">Laboratorio <b>/ ${menuPadre} / ${seccion}</b></div><div class="caja-titulo"><div><h3>${seccion}</h3><p>${datos.descripcion}</p></div><button class="btn-secundario" id="btn-accion-laboratorio">Agregar registro</button></div><div class="caja-form-panel"><div class="caja-form-grid"><div class="caja-campo col-12"><label for="buscar-laboratorio">Filtrar todos los campos</label><input id="buscar-laboratorio" type="search" placeholder="Buscar paciente, examen u orden..."></div></div><div class="caja-tabla-wrap"><table class="caja-tabla" id="tabla-laboratorio"><thead><tr>${datos.columnas.map(col=>`<th>${col}</th>`).join('')}</tr></thead><tbody>${filas}</tbody></table></div></div></div>`;
-  document.getElementById('buscar-laboratorio').addEventListener('input',e=>document.querySelectorAll('#tabla-laboratorio tbody tr').forEach(fila=>fila.style.display=fila.textContent.toLowerCase().includes(e.target.value.toLowerCase())?'':'none'));
-  document.getElementById('btn-accion-laboratorio').addEventListener('click',e=>{barraEstado.textContent=`Registro de ${seccion} preparado (demo).`;e.currentTarget.disabled=true;});
-  barraEstado.textContent=`Laboratorio › ${menuPadre} › ${seccion}`;
-}
-
-function renderHonorariosSeccion(seccion, menuPadre){
-  const datos = {
-    'Honorarios': {descripcion:'Gestiona los honorarios de los profesionales de la clínica.', columnas:['PROFESIONAL','ESPECIALIDAD','PERIODO','ATENCIONES','IMPORTE','ESTADO'], filas:[['Dr. Salazar','Traumatología','Agosto 2026','86','S/ 12,400','Por liquidar'],['Dra. Vidal','Ortopedia','Agosto 2026','64','S/ 9,850','Revisar'],['Dr. Paredes','Anestesiología','Agosto 2026','42','S/ 7,200','Liquidado']]},
-    'Tipo Servicio': {descripcion:'Configura los servicios considerados para el cálculo de honorarios.', columnas:['CÓDIGO','SERVICIO','ESPECIALIDAD','TARIFA','ESTADO'], filas:[['TS-001','Consulta especializada','Traumatología','S/ 80.00','Activo'],['TS-002','Procedimiento quirúrgico','Ortopedia','S/ 450.00','Activo'],['TS-003','Evaluación preanestésica','Anestesiología','S/ 120.00','Activo']]},
-    'Excepciones': {descripcion:'Administra las reglas especiales aplicadas a la liquidación de honorarios.', columnas:['CÓDIGO','PROFESIONAL','MOTIVO','PERIODO','VALOR','ESTADO'], filas:[['EX-001','Dra. Vidal','Tarifa preferencial','Agosto 2026','10%','Activa'],['EX-002','Dr. Paredes','Guardia adicional','Agosto 2026','S/ 300.00','Pendiente']]}
-  }[seccion];
-  const vista=document.getElementById('vista-seccion');
-  const filas=datos.filas.map(fila=>`<tr>${fila.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('');
-  vista.innerHTML=`<div class="caja-vista"><div class="migaja">Honorarios <b>/ ${menuPadre} / ${seccion}</b></div><div class="caja-titulo"><div><h3>${seccion}</h3><p>${datos.descripcion}</p></div><button class="btn-secundario" id="btn-accion-honorarios">Agregar registro</button></div><div class="caja-form-panel"><div class="caja-form-grid"><div class="caja-campo col-12"><label for="buscar-honorarios">Filtrar todos los campos</label><input id="buscar-honorarios" type="search" placeholder="Buscar profesional, servicio o periodo..."></div></div><div class="caja-tabla-wrap"><table class="caja-tabla" id="tabla-honorarios"><thead><tr>${datos.columnas.map(col=>`<th>${col}</th>`).join('')}</tr></thead><tbody>${filas}</tbody></table></div></div></div>`;
-  document.getElementById('buscar-honorarios').addEventListener('input',e=>document.querySelectorAll('#tabla-honorarios tbody tr').forEach(fila=>fila.style.display=fila.textContent.toLowerCase().includes(e.target.value.toLowerCase())?'':'none'));
-  document.getElementById('btn-accion-honorarios').addEventListener('click',e=>{barraEstado.textContent=`Registro de ${seccion} preparado (demo).`;e.currentTarget.disabled=true;});
-  barraEstado.textContent=`Honorarios › ${menuPadre} › ${seccion}`;
-}
-
 function renderEmergenciaSeccion(seccion, menuPadre){
   const datos = {
     'Atenciones': {descripcion:'Registra y consulta las atenciones de los pacientes ingresados por emergencia.', columnas:['ATENCIÓN','PACIENTE','TRIAJE','MOTIVO','HORA INGRESO','ESTADO'], filas:[['EM-2401','Rosa Campos','Rojo','Fractura expuesta','07:40','Crítico'],['EM-2402','Iván Cortez','Amarillo','Esguince','08:10','En observación'],['EM-2403','Nadia Ruiz','Verde','Dolor lumbar','08:50','Estable']]},
@@ -1339,26 +1254,6 @@ function activarMenuInterno(){
         document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
         return;
       }
-      if(menuPadre === 'Consumo' && ['Pago','Registrar'].includes(seccion)){
-        renderPagoConsumo(menuPadre);
-        document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
-        return;
-      }
-      if(menuPadre === 'Consumo' && seccion === 'Registro Y Pago'){
-        renderRegistroYPago(menuPadre);
-        document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
-        return;
-      }
-      if(menuPadre === 'Consumo' && seccion === 'Nota De Crédito'){
-        renderNotaCredito(menuPadre);
-        document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
-        return;
-      }
-      if(menuPadre === 'Consumo' && seccion === 'Venta Sin Admisión'){
-        renderVentaSinAdmision(menuPadre);
-        document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
-        return;
-      }
       if(menuPadre === 'Pacientes' && seccion === 'Historia Clínica'){
         renderHistoriaClinica(menuPadre);
         document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
@@ -1366,11 +1261,6 @@ function activarMenuInterno(){
       }
       if(menuPadre === 'Ficheros' && CRUD_FICHEROS[seccion]){
         renderCrudFichero(seccion, menuPadre);
-        document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
-        return;
-      }
-      if(menuPadre === 'Comprobante' && seccion === 'Comprobantes' && document.querySelector('.panel-header h2').textContent.includes('Caja')){
-        renderComprobantesCaja(menuPadre);
         document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
         return;
       }
@@ -1404,16 +1294,6 @@ function activarMenuInterno(){
         document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
         return;
       }
-      if((menuPadre === 'Laboratorio' && seccion === 'Orden Laboratorio') || (menuPadre === 'Patología' && seccion === 'Patología')){
-        renderLaboratorioSeccion(seccion, menuPadre);
-        document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
-        return;
-      }
-      if((menuPadre === 'Ficheros' && seccion === 'Honorarios') || (menuPadre === 'Procesar' && ['Tipo Servicio','Excepciones'].includes(seccion))){
-        renderHonorariosSeccion(seccion, menuPadre);
-        document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
-        return;
-      }
       if(menuPadre === 'Procesos' || menuPadre === 'Almacén' || menuPadre === 'Ficheros' || menuPadre === 'Reportes'){
         renderLogisticaSeccion(seccion, menuPadre);
         document.querySelectorAll('#navbar-interna .menu-superior').forEach(x=>x.classList.remove('abierto'));
@@ -1442,86 +1322,13 @@ function activarMenuInterno(){
   }));
 }
 
-function formatoMoneda(monto){ return 'S/ ' + Number(monto).toFixed(2); }
-
-function mostrarToast(mensaje, tipo='exito'){
-  const contenedor = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = 'toast ' + tipo;
-  toast.textContent = mensaje;
-  contenedor.appendChild(toast);
-  setTimeout(()=>toast.remove(), 3200);
-}
-
-const PACIENTES_REGISTRO = [
-  {nombre:'María Torres',dni:'45871203',medico:'Dr. Salazar'},
-  {nombre:'Jorge Ramírez',dni:'40012398',medico:'Dra. Vidal'},
-  {nombre:'Lucía Peña',dni:'38891122',medico:'Dr. Salazar'},
-  {nombre:'Carlos Díaz',dni:'41234567',medico:'Dra. Vidal'},
-  {nombre:'Rosa Campos',dni:'32548712',medico:'Dr. Salazar'},
-  {nombre:'Iván Cortez',dni:'46789012',medico:'Dra. Vidal'},
-  {nombre:'Nadia Ruiz',dni:'48901234',medico:'Dr. Salazar'},
-  {nombre:'Ana Fuentes',dni:'41567890',medico:'Dra. Vidal'},
-  {nombre:'Pedro León',dni:'39876543',medico:'Dr. Salazar'},
-];
-
-const CONCEPTOS_COBRO = [
-  {concepto:'Consulta General',monto:80},
-  {concepto:'Consulta Especializada',monto:120},
-  {concepto:'Rayos X',monto:150},
-  {concepto:'Terapia Física',monto:60},
-  {concepto:'Laboratorio',monto:45},
-  {concepto:'Farmacia',monto:0},
-  {concepto:'Procedimiento Quirúrgico',monto:450},
-  {concepto:'Ecografía',monto:100},
-  {concepto:'Infiltración',monto:200},
-];
-
 let CAJA_ACTUAL = { abierta:false, id:null, caja:'', monto:0, observacion:'', fecha:'', usuario:'AMACEDO' };
 let REGISTROS_CAJAS = [
   {id:'522',caja:'PINILLOS',fecha:'02/09/2026 08:10',usuario:'JFLORES',monto:0,estado:'ABIERTO'},
   {id:'521',caja:'ADMISION LINCE 1',fecha:'02/09/2026 07:12',usuario:'IHUAMAN',monto:0,estado:'ABIERTO'}
 ];
-
-let MOVIMIENTOS_CAJA = [
-  {id:'MOV-001',fecha:'02/09/2026 08:15',paciente:'María Torres',dni:'45871203',concepto:'Consulta General',monto:80,medioPago:'Efectivo',comprobante:'B001-0231',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-002',fecha:'02/09/2026 08:28',paciente:'Jorge Ramírez',dni:'40012398',concepto:'Rayos X',monto:150,medioPago:'Tarjeta',comprobante:'B001-0232',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-003',fecha:'02/09/2026 08:42',paciente:'Lucía Peña',dni:'38891122',concepto:'Terapia Física',monto:60,medioPago:'Efectivo',comprobante:'B001-0233',estado:'Pendiente',usuario:'AMACEDO'},
-  {id:'MOV-004',fecha:'02/09/2026 09:05',paciente:'Carlos Díaz',dni:'41234567',concepto:'Consulta Especializada',monto:120,medioPago:'Transferencia',comprobante:'B001-0234',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-005',fecha:'02/09/2026 09:20',paciente:'Rosa Campos',dni:'32548712',concepto:'Laboratorio',monto:45,medioPago:'Efectivo',comprobante:'B001-0235',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-006',fecha:'02/09/2026 09:35',paciente:'Iván Cortez',dni:'46789012',concepto:'Ecografía',monto:100,medioPago:'Efectivo',comprobante:'B001-0236',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-007',fecha:'02/09/2026 09:48',paciente:'Nadia Ruiz',dni:'48901234',concepto:'Infiltración',monto:200,medioPago:'Tarjeta',comprobante:'B001-0237',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-008',fecha:'02/09/2026 10:02',paciente:'Ana Fuentes',dni:'41567890',concepto:'Consulta General',monto:80,medioPago:'Efectivo',comprobante:'B001-0238',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-009',fecha:'02/09/2026 10:15',paciente:'Pedro León',dni:'39876543',concepto:'Procedimiento Quirúrgico',monto:450,medioPago:'Transferencia',comprobante:'B001-0239',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-010',fecha:'02/09/2026 10:30',paciente:'María Torres',dni:'45871203',concepto:'Farmacia',monto:35,medioPago:'Efectivo',comprobante:'B001-0240',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-011',fecha:'02/09/2026 10:45',paciente:'Jorge Ramírez',dni:'40012398',concepto:'Consulta General',monto:80,medioPago:'Efectivo',comprobante:'B001-0241',estado:'Pagado',usuario:'AMACEDO'},
-  {id:'MOV-012',fecha:'02/09/2026 11:00',paciente:'Lucía Peña',dni:'38891122',concepto:'Laboratorio',monto:45,medioPago:'Tarjeta',comprobante:'B001-0242',estado:'Pagado',usuario:'AMACEDO'},
-];
-let contadorMOV = 13;
-
-function totalIngresosCaja(){ return MOVIMIENTOS_CAJA.filter(m=>m.estado==='Pagado' && String(m.concepto).indexOf('Nota Credito')!==0).reduce((total,movimiento)=>total + movimiento.monto, 0); }
-function totalPendienteCobro(){ return MOVIMIENTOS_CAJA.filter(m=>m.estado==='Pendiente').reduce((total,movimiento)=>total + movimiento.monto, 0); }
-function ingresosPorMedio(){
-  const ingresos = MOVIMIENTOS_CAJA.filter(m=>m.estado==='Pagado' && String(m.concepto).indexOf('Nota Credito')!==0);
-  const medios = {};
-  ingresos.forEach(m=>{ medios[m.medioPago] = (medios[m.medioPago] || 0) + m.monto; });
-  return medios;
-}
-
-function generarComprobante(){
-  const num = String(240 + contadorMOV).padStart(4,'0');
-  return 'B001-' + num;
-}
-
-function generarIdMovimiento(){
-  return 'MOV-' + String(contadorMOV++).padStart(3,'0');
-}
-
-function buscarPacienteCaja(query){
-  const q = query.toLowerCase().trim();
-  if(!q) return [];
-  return PACIENTES_REGISTRO.filter(p=>p.nombre.toLowerCase().includes(q) || p.dni.includes(q));
-}
+const MOVIMIENTOS_CAJA = Array.from({length:24}, (_,indice)=>({medio:'EFECTIVO',detalle:indice === 23 ? 'Pago acumulado' : 'Pago de atención',monto:indice === 23 ? 1520 : 300}));
+function totalIngresosCaja(){ return MOVIMIENTOS_CAJA.reduce((total,movimiento)=>total + movimiento.monto, 0); }
 
 function renderCajaSeccion(seccion, menuPadre){
   const vista=document.getElementById('vista-seccion');
@@ -1533,434 +1340,10 @@ function renderCajaSeccion(seccion, menuPadre){
     vista.innerHTML=`<div class="caja-vista"><div class="migaja">Caja <b>/ Apertura</b></div><div class="caja-titulo"><div><h3>Apertura de Caja</h3><p>Inicia un turno para registrar operaciones en una caja.</p></div></div><form class="caja-form-panel" id="form-apertura"><p class="caja-seccion-titulo">Apertura de Caja</p><div class="caja-form-grid"><div class="caja-campo col-6"><label for="caja-apertura">Caja</label><select id="caja-apertura"><option>PINILLOS</option><option>ADMISION LINCE 1</option></select></div><div class="caja-campo col-6"><label for="monto-apertura">Monto Apertura</label><input id="monto-apertura" type="number" min="0" value="0"></div><div class="caja-campo col-12"><label for="observacion-apertura">Observación</label><input id="observacion-apertura" type="text" placeholder="Escribe una observación (opcional)"></div></div><div class="caja-form-actions"><button type="submit" class="btn-primario">Aperturar</button></div></form></div>`;
     document.getElementById('form-apertura').addEventListener('submit',e=>{e.preventDefault();const formulario=e.currentTarget;const boton=formulario.querySelector('button[type="submit"]');if(boton.disabled)return;const id=String(Math.max(0,...REGISTROS_CAJAS.map(registro=>Number(registro.id)||0))+1);CAJA_ACTUAL={abierta:true,id,caja:document.getElementById('caja-apertura').value,monto:Number(document.getElementById('monto-apertura').value)||0,observacion:document.getElementById('observacion-apertura').value.trim(),fecha:'02/09/2026 10:00',usuario:'AMACEDO'};REGISTROS_CAJAS.unshift({id,caja:CAJA_ACTUAL.caja,fecha:CAJA_ACTUAL.fecha,usuario:CAJA_ACTUAL.usuario,monto:CAJA_ACTUAL.monto,estado:'ABIERTO'});boton.disabled=true;boton.textContent='Caja aperturada';formulario.insertAdjacentHTML('afterbegin','<div class="caja-confirmacion"><span>✓</span><div><strong>Caja aperturada correctamente</strong><span>Ya puedes registrar pagos y consumos en este turno.</span></div></div>');barraEstado.textContent=`Caja ${CAJA_ACTUAL.caja} aperturada correctamente (demo).`;});
   } else {
-    vista.innerHTML=CAJA_ACTUAL.abierta ? `<div class="caja-vista"><div class="migaja">Caja <b>/ Cierre</b></div><div class="caja-titulo"><div><h3>Cierre de Caja</h3><p>Revisa los ingresos del turno antes de cerrar la caja.</p></div></div><div class="caja-form-panel"><div class="caja-info">● Caja abierta: ${CAJA_ACTUAL.caja} · Apertura ${CAJA_ACTUAL.fecha} · Usuario ${CAJA_ACTUAL.usuario}</div><div class="caja-datos"><div class="caja-dato"><span>Importe de apertura</span><strong>S/ ${CAJA_ACTUAL.monto.toFixed(2)}</strong></div><div class="caja-dato"><span>Ingresos del turno</span><strong>S/ ${totalIngresosCaja().toFixed(2)}</strong></div><div class="caja-dato"><span>Estado</span><strong>Abierta</strong></div></div><h4 class="caja-seccion-titulo">Ingresos por medio</h4><div class="caja-tabla-wrap"><table class="caja-tabla" style="min-width:0"><thead><tr><th>MEDIO</th><th>CANTIDAD</th><th>MONTO</th><th>DÓLAR</th></tr></thead><tbody>${Object.keys(ingresosPorMedio()).map(medio=>`<tr><td>${medio}</td><td>${MOVIMIENTOS_CAJA.filter(m=>m.estado==='Pagado' && String(m.concepto).indexOf('Nota Credito')!==0 && m.medioPago===medio).length}</td><td>S/ ${ingresosPorMedio()[medio].toFixed(2)}</td><td>$ 0.00</td></tr>`).join('')}<tr><td><strong>TOTAL</strong></td><td>${MOVIMIENTOS_CAJA.filter(m=>m.estado==='Pagado' && String(m.concepto).indexOf('Nota Credito')!==0).length}</td><td><strong>S/ ${totalIngresosCaja().toFixed(2)}</strong></td><td><strong>$ 0.00</strong></td></tr></tbody></table></div><div class="caja-form-grid" style="margin-top:18px"><div class="caja-campo col-12"><label for="observacion-cierre">Observaciones</label><input id="observacion-cierre" type="text" value="${CAJA_ACTUAL.observacion}" placeholder="Observaciones del cierre"></div></div><div class="caja-form-actions"><button class="btn-primario" id="btn-cerrar-caja">Cerrar caja</button></div></div></div>` : `<div class="caja-vista"><div class="migaja">Caja <b>/ Cierre</b></div><div class="caja-form-panel caja-vacio"><div class="caja-vacio-icono">✓</div><h4>No tienes una caja aperturada</h4><p>Para consultar ingresos y realizar el cierre, primero debes aperturar una caja.</p><button class="btn-primario" id="ir-apertura">Ir a Apertura</button></div></div>`;
+    vista.innerHTML=CAJA_ACTUAL.abierta ? `<div class="caja-vista"><div class="migaja">Caja <b>/ Cierre</b></div><div class="caja-titulo"><div><h3>Cierre de Caja</h3><p>Revisa los ingresos del turno antes de cerrar la caja.</p></div></div><div class="caja-form-panel"><div class="caja-info">● Caja abierta: ${CAJA_ACTUAL.caja} · Apertura ${CAJA_ACTUAL.fecha} · Usuario ${CAJA_ACTUAL.usuario}</div><div class="caja-datos"><div class="caja-dato"><span>Importe de apertura</span><strong>S/ ${CAJA_ACTUAL.monto.toFixed(2)}</strong></div><div class="caja-dato"><span>Ingresos del turno</span><strong>S/ ${totalIngresosCaja().toFixed(2)}</strong></div><div class="caja-dato"><span>Estado</span><strong>Abierta</strong></div></div><h4 class="caja-seccion-titulo">Ingresos por medio</h4><div class="caja-tabla-wrap"><table class="caja-tabla" style="min-width:0"><thead><tr><th>MEDIO</th><th>DETALLE</th><th>CANTIDAD</th><th>SOL</th><th>DÓLAR</th></tr></thead><tbody><tr><td>EFECTIVO</td><td>Recaudación del turno</td><td>${MOVIMIENTOS_CAJA.length}</td><td>S/ ${totalIngresosCaja().toFixed(2)}</td><td>$ 0.00</td></tr></tbody></table></div><div class="caja-form-grid" style="margin-top:18px"><div class="caja-campo col-12"><label for="observacion-cierre">Observaciones</label><input id="observacion-cierre" type="text" value="${CAJA_ACTUAL.observacion}" placeholder="Observaciones del cierre"></div></div><div class="caja-form-actions"><button class="btn-primario" id="btn-cerrar-caja">Cerrar caja</button></div></div></div>` : `<div class="caja-vista"><div class="migaja">Caja <b>/ Cierre</b></div><div class="caja-form-panel caja-vacio"><div class="caja-vacio-icono">✓</div><h4>No tienes una caja aperturada</h4><p>Para consultar ingresos y realizar el cierre, primero debes aperturar una caja.</p><button class="btn-primario" id="ir-apertura">Ir a Apertura</button></div></div>`;
     if(CAJA_ACTUAL.abierta) document.getElementById('btn-cerrar-caja').addEventListener('click',()=>{const registro=REGISTROS_CAJAS.find(item=>item.id===CAJA_ACTUAL.id);if(registro){registro.estado='CERRADO';registro.cierre='02/09/2026 18:00';registro.usuarioCierre=CAJA_ACTUAL.usuario;registro.montoCierre=totalIngresosCaja();}CAJA_ACTUAL.abierta=false;renderCajaSeccion('Cierre',menuPadre);barraEstado.textContent=`Caja ${CAJA_ACTUAL.caja} cerrada correctamente (demo).`;}); else document.getElementById('ir-apertura').addEventListener('click',()=>renderCajaSeccion('Apertura',menuPadre));
   }
   barraEstado.textContent=`Caja › ${seccion}`;
-}
-
-function renderPagoConsumo(menuPadre){
-  const vista = document.getElementById('vista-seccion');
-  if(!CAJA_ACTUAL.abierta){
-    vista.innerHTML = `<div class="caja-vista"><div class="migaja">Caja <b>/ Consumo</b></div><div class="caja-form-panel caja-vacio"><div class="caja-vacio-icono">⚠</div><h4>No hay caja abierta</h4><p>No puedes registrar pagos sin una caja aperturada. Apertura una caja primero.</p><button class="btn-primario" id="ir-apertura-consumo">Ir a Apertura</button></div></div>`;
-    document.getElementById('ir-apertura-consumo').addEventListener('click',()=>renderCajaSeccion('Apertura',menuPadre));
-    barraEstado.textContent='Caja > Consumo (requiere apertura)';
-    return;
-  }
-  const conceptosOpts = CONCEPTOS_COBRO.map(c=>`<option data-monto="${c.monto}">${c.concepto}</option>`).join('');
-  vista.innerHTML = `<div class="caja-vista"><div class="migaja">Caja <b>/ ${menuPadre} / Pago</b></div><div class="caja-titulo"><div><h3>Registrar Pago</h3><p>Registra el cobro de un servicio o producto al paciente.</p></div></div><div class="caja-info">● Caja abierta: ${CAJA_ACTUAL.caja} · Turno ${CAJA_ACTUAL.fecha} · ${CAJA_ACTUAL.usuario}</div><form class="caja-form-panel" id="form-pago-consumo"><div class="caja-form-grid"><div class="caja-campo col-6 paciente-busqueda-wrap"><label for="pago-paciente">Paciente *</label><input id="pago-paciente" type="text" placeholder="Buscar por nombre o DNI..." autocomplete="off" required><div class="paciente-busqueda-lista" id="lista-pacientes-pago"></div><input id="pago-paciente-dni" type="hidden"><span class="campo-mensaje">Selecciona un paciente de la lista</span></div><div class="caja-campo col-6"><label for="pago-concepto">Concepto *</label><select id="pago-concepto" required><option value="">Seleccionar concepto</option>${conceptosOpts}</select><span class="campo-mensaje">Selecciona un concepto</span></div><div class="caja-campo col-4"><label for="pago-monto">Monto (S/) *</label><input id="pago-monto" type="number" min="0.01" step="0.01" placeholder="0.00" required><span class="campo-mensaje">El monto debe ser mayor a 0</span></div><div class="caja-campo col-4"><label for="pago-medio">Medio de pago *</label><select id="pago-medio" required><option value="">Seleccionar</option><option>Efectivo</option><option>Tarjeta</option><option>Transferencia</option></select><span class="campo-mensaje">Selecciona un medio de pago</span></div><div class="caja-campo col-4"><label for="pago-comprobante">Tipo comprobante *</label><select id="pago-comprobante" required><option value="">Seleccionar</option><option>Boleta</option><option>Factura</option><option>Sin comprobante</option></select><span class="campo-mensaje">Selecciona tipo de comprobante</span></div><div class="caja-campo col-6" id="wrap-monto-recibido" style="display:none"><label for="pago-recibido">Monto recibido (S/)</label><input id="pago-recibido" type="number" min="0" step="0.01" placeholder="0.00"></div><div class="caja-campo col-6" id="wrap-vuelto" style="display:none"></div><div class="caja-campo col-12"><label for="pago-observacion">Observacion</label><input id="pago-observacion" type="text" placeholder="Nota opcional sobre el pago"></div></div><div class="caja-form-actions"><button type="submit" class="btn-primario" id="btn-registrar-pago" disabled>Registrar Pago</button></div></form><div class="caja-form-panel" style="margin-top:16px"><h4 class="caja-seccion-titulo">Ultimos movimientos</h4><div class="caja-form-grid" style="padding:0 0 10px"><div class="caja-campo col-12"><label for="buscar-movimientos">Filtrar movimientos</label><input id="buscar-movimientos" type="search" placeholder="Buscar por paciente, concepto o comprobante..."></div></div><div class="caja-tabla-wrap"><table class="caja-tabla" id="tabla-movimientos" style="min-width:0"><thead><tr><th>ID</th><th>HORA</th><th>PACIENTE</th><th>CONCEPTO</th><th>MONTO</th><th>MEDIO</th><th>COMPROBANTE</th><th>ESTADO</th></tr></thead><tbody id="tbody-movimientos">${renderFilasMovimientos()}</tbody></table></div></div></div>`;
-  activarPagoConsumo(menuPadre);
-  barraEstado.textContent = 'Caja > Consumo > Pago';
-}
-
-function renderFilasMovimientos(filtro){
-  const q = (filtro||'').toLowerCase().trim();
-  const filtrados = MOVIMIENTOS_CAJA.filter(m=>!q || m.paciente.toLowerCase().includes(q) || m.concepto.toLowerCase().includes(q) || m.comprobante.toLowerCase().includes(q));
-  return filtrados.slice().reverse().slice(0,15).map(m=>`<tr><td>${m.id}</td><td>${m.fecha.split(' ')[1]||'--'}</td><td>${m.paciente}</td><td>${m.concepto}</td><td>${formatoMoneda(m.monto)}</td><td>${m.medioPago}</td><td>${m.comprobante}</td><td><span class="crud-status ${m.estado==='Anulado'?'inactivo':''}">${m.estado}</span></td></tr>`).join('');
-}
-
-function activarPagoConsumo(){
-  const inputPaciente = document.getElementById('pago-paciente');
-  const listaPacientes = document.getElementById('lista-pacientes-pago');
-  const inputDNI = document.getElementById('pago-paciente-dni');
-  const selectConcepto = document.getElementById('pago-concepto');
-  const inputMonto = document.getElementById('pago-monto');
-  const selectMedio = document.getElementById('pago-medio');
-  const selectComprobante = document.getElementById('pago-comprobante');
-  const inputRecibido = document.getElementById('pago-recibido');
-  const wrapRecibido = document.getElementById('wrap-monto-recibido');
-  const wrapVuelto = document.getElementById('wrap-vuelto');
-  const btnRegistrar = document.getElementById('btn-registrar-pago');
-  const form = document.getElementById('form-pago-consumo');
-
-  function validarCampo(input, condicion){
-    const wrap = input.closest('.caja-campo');
-    if(condicion){ wrap.classList.remove('campo-invalido'); return true; }
-    wrap.classList.add('campo-invalido'); return false;
-  }
-
-  function verificarFormulario(){
-    const pv = inputDNI.value !== '';
-    const cv = selectConcepto.value !== '';
-    const mv = inputMonto.value !== '' && Number(inputMonto.value) > 0;
-    const mdv = selectMedio.value !== '';
-    const cv2 = selectComprobante.value !== '';
-    let vv = true;
-    if(selectMedio.value === 'Efectivo' && inputRecibido.value !== ''){
-      vv = Number(inputRecibido.value) >= Number(inputMonto.value);
-    }
-    btnRegistrar.disabled = !(pv && cv && mv && mdv && cv2 && vv);
-  }
-
-  inputPaciente.addEventListener('input', function(){
-    const query = this.value.trim();
-    inputDNI.value = '';
-    if(query.length < 2){ listaPacientes.classList.remove('mostrar'); verificarFormulario(); return; }
-    const resultados = buscarPacienteCaja(query);
-    if(!resultados.length){ listaPacientes.classList.remove('mostrar'); verificarFormulario(); return; }
-    listaPacientes.innerHTML = resultados.map(p=>`<div class="paciente-busqueda-item" data-nombre="${p.nombre}" data-dni="${p.dni}"><b>${p.nombre}</b> <span class="pb-dni">DNI: ${p.dni}</span></div>`).join('');
-    listaPacientes.classList.add('mostrar');
-    listaPacientes.querySelectorAll('.paciente-busqueda-item').forEach(function(item){
-      item.addEventListener('click', function(){
-        inputPaciente.value = item.dataset.nombre;
-        inputDNI.value = item.dataset.dni;
-        listaPacientes.classList.remove('mostrar');
-        validarCampo(inputPaciente, true);
-        verificarFormulario();
-      });
-    });
-  });
-  inputPaciente.addEventListener('blur', function(){ setTimeout(function(){ listaPacientes.classList.remove('mostrar'); }, 200); });
-
-  selectConcepto.addEventListener('change', function(){
-    const opt = this.selectedOptions[0];
-    if(opt && opt.dataset.monto && Number(opt.dataset.monto) > 0){ inputMonto.value = opt.dataset.monto; }
-    validarCampo(this, this.value!=='');
-    verificarFormulario();
-  });
-
-  inputMonto.addEventListener('input', function(){
-    validarCampo(this, this.value!=='' && Number(this.value)>0);
-    calcularVuelto();
-    verificarFormulario();
-  });
-
-  selectMedio.addEventListener('change', function(){
-    wrapRecibido.style.display = this.value==='Efectivo' ? '' : 'none';
-    wrapVuelto.style.display = this.value==='Efectivo' ? '' : 'none';
-    validarCampo(this, this.value!=='');
-    verificarFormulario();
-  });
-
-  selectComprobante.addEventListener('change', function(){
-    validarCampo(this, this.value!=='');
-    verificarFormulario();
-  });
-
-  inputRecibido.addEventListener('input', function(){
-    calcularVuelto();
-    verificarFormulario();
-  });
-
-  function calcularVuelto(){
-    if(selectMedio.value !== 'Efectivo' || !inputRecibido.value || !inputMonto.value){ wrapVuelto.innerHTML = ''; return; }
-    var recibido = Number(inputRecibido.value);
-    var monto = Number(inputMonto.value);
-    var vuelto = recibido - monto;
-    if(vuelto < 0){
-      wrapVuelto.innerHTML = '<div class="pago-vuelto negativo">Monto insuficiente: falta ' + formatoMoneda(Math.abs(vuelto)) + '</div>';
-    } else {
-      wrapVuelto.innerHTML = '<div class="pago-vuelto">Vuelto: ' + formatoMoneda(vuelto) + '</div>';
-    }
-  }
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var pv = validarCampo(inputPaciente, inputDNI.value!=='');
-    var cv = validarCampo(selectConcepto, selectConcepto.value!=='');
-    var mv = validarCampo(inputMonto, inputMonto.value!=='' && Number(inputMonto.value)>0);
-    var mdv = validarCampo(selectMedio, selectMedio.value!=='');
-    var cv2 = validarCampo(selectComprobante, selectComprobante.value!=='');
-    if(!(pv && cv && mv && mdv && cv2)) return;
-
-    var nroComprobante = selectComprobante.value === 'Sin comprobante' ? '--' : generarComprobante();
-    var nuevoMovimiento = {
-      id: generarIdMovimiento(),
-      fecha: '02/09/2026 ' + new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),
-      paciente: inputPaciente.value.trim(),
-      dni: inputDNI.value,
-      concepto: selectConcepto.value,
-      monto: Number(inputMonto.value),
-      medioPago: selectMedio.value,
-      comprobante: nroComprobante,
-      estado: 'Pagado',
-      usuario: CAJA_ACTUAL.usuario
-    };
-    MOVIMIENTOS_CAJA.push(nuevoMovimiento);
-    var tbody = document.getElementById('tbody-movimientos');
-    if(tbody) tbody.innerHTML = renderFilasMovimientos();
-    form.reset();
-    inputDNI.value = '';
-    wrapRecibido.style.display = 'none';
-    wrapVuelto.style.display = 'none';
-    document.querySelectorAll('#form-pago-consumo .campo-invalido').forEach(function(el){ el.classList.remove('campo-invalido'); });
-    btnRegistrar.disabled = true;
-    mostrarToast('Pago registrado: ' + formatoMoneda(nuevoMovimiento.monto) + ' -- ' + nuevoMovimiento.paciente + ' (' + nroComprobante + ')');
-    barraEstado.textContent = 'Pago ' + nuevoMovimiento.id + ' registrado correctamente';
-  });
-
-  var buscarMov = document.getElementById('buscar-movimientos');
-  if(buscarMov) buscarMov.addEventListener('input', function(){
-    var tbody = document.getElementById('tbody-movimientos');
-    if(tbody) tbody.innerHTML = renderFilasMovimientos(this.value);
-  });
-}
-
-function renderRegistroYPago(menuPadre){
-  var vista = document.getElementById('vista-seccion');
-  if(!CAJA_ACTUAL.abierta){
-    vista.innerHTML = '<div class="caja-vista"><div class="migaja">Caja <b>/ Consumo</b></div><div class="caja-form-panel caja-vacio"><div class="caja-vacio-icono">⚠</div><h4>No hay caja abierta</h4><p>Apertura una caja primero para registrar pagos.</p><button class="btn-primario" id="ir-apertura-ryp">Ir a Apertura</button></div></div>';
-    document.getElementById('ir-apertura-ryp').addEventListener('click',function(){ renderCajaSeccion('Apertura',menuPadre); });
-    barraEstado.textContent='Caja > Registro Y Pago (requiere apertura)';
-    return;
-  }
-  var conceptosOpts = CONCEPTOS_COBRO.map(function(c){ return '<option data-monto="'+c.monto+'">'+c.concepto+'</option>'; }).join('');
-  vista.innerHTML = '<div class="caja-vista"><div class="migaja">Caja <b>/ '+menuPadre+' / Registro Y Pago</b></div><div class="caja-titulo"><div><h3>Registro y Pago</h3><p>Registra el servicio y confirma el cobro en un solo paso.</p></div></div><div class="caja-info">● Caja abierta: '+CAJA_ACTUAL.caja+'</div><form class="caja-form-panel" id="form-ryp"><p class="caja-seccion-titulo">Datos del servicio</p><div class="caja-form-grid"><div class="caja-campo col-6 paciente-busqueda-wrap"><label for="ryp-paciente">Paciente *</label><input id="ryp-paciente" type="text" placeholder="Buscar por nombre o DNI..." autocomplete="off" required><div class="paciente-busqueda-lista" id="lista-pacientes-ryp"></div><input id="ryp-paciente-dni" type="hidden"><span class="campo-mensaje">Selecciona un paciente de la lista</span></div><div class="caja-campo col-6"><label for="ryp-concepto">Concepto *</label><select id="ryp-concepto" required><option value="">Seleccionar</option>'+conceptosOpts+'</select><span class="campo-mensaje">Selecciona un concepto</span></div><div class="caja-campo col-6"><label for="ryp-monto">Monto (S/) *</label><input id="ryp-monto" type="number" min="0.01" step="0.01" placeholder="0.00" required><span class="campo-mensaje">El monto debe ser mayor a 0</span></div><div class="caja-campo col-6"><label for="ryp-medio">Medio de pago *</label><select id="ryp-medio" required><option value="">Seleccionar</option><option>Efectivo</option><option>Tarjeta</option><option>Transferencia</option></select><span class="campo-mensaje">Selecciona un medio de pago</span></div><div class="caja-campo col-6" id="wrap-ryp-recibido" style="display:none"><label for="ryp-recibido">Monto recibido (S/)</label><input id="ryp-recibido" type="number" min="0" step="0.01" placeholder="0.00"></div><div class="caja-campo col-6" id="wrap-ryp-vuelto" style="display:none"></div><div class="caja-campo col-6"><label for="ryp-comprobante">Tipo comprobante *</label><select id="ryp-comprobante" required><option value="">Seleccionar</option><option>Boleta</option><option>Factura</option><option>Sin comprobante</option></select><span class="campo-mensaje">Selecciona tipo de comprobante</span></div><div class="caja-campo col-12"><label for="ryp-observacion">Observacion</label><input id="ryp-observacion" type="text" placeholder="Nota opcional"></div></div><div class="caja-form-actions"><button type="submit" class="btn-primario" id="btn-ryp" disabled>Registrar y Cobrar</button></div></form></div>';
-  var form = document.getElementById('form-ryp');
-  var btnRYP = document.getElementById('btn-ryp');
-  var wrapRecibido = document.getElementById('wrap-ryp-recibido');
-  var wrapVuelto = document.getElementById('wrap-ryp-vuelto');
-  var inputPaciente = document.getElementById('ryp-paciente');
-  var listaP = document.getElementById('lista-pacientes-ryp');
-  var inputDNI = document.getElementById('ryp-paciente-dni');
-
-  function verificarRYP(){
-    var pac = inputDNI.value !== '';
-    var con = document.getElementById('ryp-concepto').value !== '';
-    var mon = document.getElementById('ryp-monto').value !== '' && Number(document.getElementById('ryp-monto').value) > 0;
-    var med = document.getElementById('ryp-medio').value !== '';
-    var com = document.getElementById('ryp-comprobante').value !== '';
-    var vu = true;
-    if(document.getElementById('ryp-medio').value === 'Efectivo' && document.getElementById('ryp-recibido').value !== ''){
-      vu = Number(document.getElementById('ryp-recibido').value) >= Number(document.getElementById('ryp-monto').value);
-    }
-    btnRYP.disabled = !(pac && con && mon && med && com && vu);
-  }
-  function validar(input, ok){
-    var w = input.closest('.caja-campo');
-    if(ok){ w.classList.remove('campo-invalido'); return true; }
-    w.classList.add('campo-invalido'); return false;
-  }
-
-  inputPaciente.addEventListener('input', function(){
-    var q = this.value.trim();
-    inputDNI.value = '';
-    if(q.length < 2){ listaP.classList.remove('mostrar'); verificarRYP(); return; }
-    var res = buscarPacienteCaja(q);
-    if(!res.length){ listaP.classList.remove('mostrar'); verificarRYP(); return; }
-    listaP.innerHTML = res.map(function(p){ return '<div class="paciente-busqueda-item" data-nombre="'+p.nombre+'" data-dni="'+p.dni+'"><b>'+p.nombre+'</b> <span class="pb-dni">DNI: '+p.dni+'</span></div>'; }).join('');
-    listaP.classList.add('mostrar');
-    listaP.querySelectorAll('.paciente-busqueda-item').forEach(function(item){
-      item.addEventListener('click', function(){
-        inputPaciente.value = item.dataset.nombre;
-        inputDNI.value = item.dataset.dni;
-        listaP.classList.remove('mostrar');
-        validar(inputPaciente, true);
-        verificarRYP();
-      });
-    });
-  });
-  inputPaciente.addEventListener('blur', function(){ setTimeout(function(){ listaP.classList.remove('mostrar'); }, 200); });
-
-  document.getElementById('ryp-concepto').addEventListener('change', function(){
-    var opt = this.selectedOptions[0];
-    if(opt && opt.dataset.monto && Number(opt.dataset.monto) > 0) document.getElementById('ryp-monto').value = opt.dataset.monto;
-    validar(this, this.value!==''); verificarRYP();
-  });
-  document.getElementById('ryp-monto').addEventListener('input', function(){
-    validar(this, this.value!=='' && Number(this.value)>0);
-    if(document.getElementById('ryp-medio').value==='Efectivo' && document.getElementById('ryp-recibido').value){
-      var v = Number(document.getElementById('ryp-recibido').value) - Number(this.value);
-      wrapVuelto.innerHTML = v < 0 ? '<div class="pago-vuelto negativo">Falta '+formatoMoneda(Math.abs(v))+'</div>' : '<div class="pago-vuelto">Vuelto: '+formatoMoneda(v)+'</div>';
-    }
-    verificarRYP();
-  });
-  document.getElementById('ryp-medio').addEventListener('change', function(){
-    wrapRecibido.style.display = this.value==='Efectivo' ? '' : 'none';
-    wrapVuelto.style.display = this.value==='Efectivo' ? '' : 'none';
-    validar(this, this.value!==''); verificarRYP();
-  });
-  document.getElementById('ryp-comprobante').addEventListener('change', function(){ validar(this, this.value!==''); verificarRYP(); });
-  document.getElementById('ryp-recibido').addEventListener('input', function(){
-    var monto = Number(document.getElementById('ryp-monto').value)||0;
-    var v = Number(this.value) - monto;
-    wrapVuelto.innerHTML = v < 0 ? '<div class="pago-vuelto negativo">Falta '+formatoMoneda(Math.abs(v))+'</div>' : '<div class="pago-vuelto">Vuelto: '+formatoMoneda(v)+'</div>';
-    verificarRYP();
-  });
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var pac = validar(inputPaciente, inputDNI.value!=='');
-    var con = validar(document.getElementById('ryp-concepto'), document.getElementById('ryp-concepto').value!=='');
-    var mon = validar(document.getElementById('ryp-monto'), document.getElementById('ryp-monto').value!=='' && Number(document.getElementById('ryp-monto').value)>0);
-    var med = validar(document.getElementById('ryp-medio'), document.getElementById('ryp-medio').value!=='');
-    var com = validar(document.getElementById('ryp-comprobante'), document.getElementById('ryp-comprobante').value!=='');
-    if(!(pac && con && mon && med && com)) return;
-    var nroComprobante = document.getElementById('ryp-comprobante').value === 'Sin comprobante' ? '--' : generarComprobante();
-    var nuevo = {
-      id: generarIdMovimiento(),
-      fecha: '02/09/2026 ' + new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),
-      paciente: inputPaciente.value.trim(),
-      dni: inputDNI.value,
-      concepto: document.getElementById('ryp-concepto').value,
-      monto: Number(document.getElementById('ryp-monto').value),
-      medioPago: document.getElementById('ryp-medio').value,
-      comprobante: nroComprobante,
-      estado: 'Pagado',
-      usuario: CAJA_ACTUAL.usuario
-    };
-    MOVIMIENTOS_CAJA.push(nuevo);
-    mostrarToast('Servicio registrado y cobrado: ' + formatoMoneda(nuevo.monto) + ' -- ' + nuevo.paciente + ' (' + nroComprobante + ')');
-    barraEstado.textContent = nuevo.id + ' registrado y cobrado correctamente';
-    form.reset();
-    inputDNI.value = '';
-    wrapRecibido.style.display = 'none';
-    wrapVuelto.style.display = 'none';
-    document.querySelectorAll('#form-ryp .campo-invalido').forEach(function(el){ el.classList.remove('campo-invalido'); });
-    btnRYP.disabled = true;
-  });
-  barraEstado.textContent = 'Caja > Registro Y Pago';
-}
-
-function renderVentaSinAdmision(menuPadre){
-  var vista = document.getElementById('vista-seccion');
-  if(!CAJA_ACTUAL.abierta){
-    vista.innerHTML = '<div class="caja-vista"><div class="migaja">Caja <b>/ Consumo</b></div><div class="caja-form-panel caja-vacio"><div class="caja-vacio-icono">⚠</div><h4>No hay caja abierta</h4><p>Apertura una caja primero para registrar ventas.</p><button class="btn-primario" id="ir-apertura-vsa">Ir a Apertura</button></div></div>';
-    document.getElementById('ir-apertura-vsa').addEventListener('click',function(){ renderCajaSeccion('Apertura',menuPadre); });
-    return;
-  }
-  vista.innerHTML = '<div class="caja-vista"><div class="migaja">Caja <b>/ '+menuPadre+' / Venta Sin Admision</b></div><div class="caja-titulo"><div><h3>Venta Sin Admision</h3><p>Registra una venta directa a un cliente que no ha sido admitido en consulta.</p></div></div><div class="caja-info">● Caja abierta: '+CAJA_ACTUAL.caja+'</div><form class="caja-form-panel" id="form-vsa"><div class="caja-form-grid"><div class="caja-campo col-6"><label for="vsa-documento">Documento del cliente *</label><input id="vsa-documento" type="text" placeholder="DNI o RUC" required><span class="campo-mensaje">Ingresa DNI (8 digitos) o RUC (11 digitos)</span></div><div class="caja-campo col-6"><label for="vsa-nombre">Nombre del cliente *</label><input id="vsa-nombre" type="text" placeholder="Razon social o nombre" required><span class="campo-mensaje">Ingresa el nombre del cliente</span></div><div class="caja-campo col-6"><label for="vsa-producto">Producto *</label><select id="vsa-producto" required><option value="">Seleccionar</option><option>Paracetamol 500mg</option><option>Ibuprofeno 400mg</option><option>Venda elastica 10cm</option><option>Jeringa 5ml</option><option>Gasa esteril</option></select><span class="campo-mensaje">Selecciona un producto</span></div><div class="caja-campo col-3"><label for="vsa-cantidad">Cantidad *</label><input id="vsa-cantidad" type="number" min="1" value="1" required></div><div class="caja-campo col-3"><label for="vsa-precio">Precio unit. (S/) *</label><input id="vsa-precio" type="number" min="0.01" step="0.01" value="0" required></div><div class="caja-campo col-6"><label for="vsa-medio">Medio de pago *</label><select id="vsa-medio" required><option value="">Seleccionar</option><option>Efectivo</option><option>Tarjeta</option><option>Transferencia</option></select></div><div class="caja-campo col-6"><label>Total</label><div style="padding:10px;background:var(--gris-100);border:1px solid var(--gris-300);border-radius:7px;font-size:14px;font-weight:700;color:var(--azul-700)" id="vsa-total">S/ 0.00</div></div></div><div class="caja-form-actions"><button type="submit" class="btn-primario" id="btn-vsa" disabled>Emitir Venta</button></div></form></div>';
-  var form = document.getElementById('form-vsa');
-  var btnVSA = document.getElementById('btn-vsa');
-  var inputDoc = document.getElementById('vsa-documento');
-  var inputNombre = document.getElementById('vsa-nombre');
-  var inputProd = document.getElementById('vsa-producto');
-  var inputCant = document.getElementById('vsa-cantidad');
-  var inputPrec = document.getElementById('vsa-precio');
-  var inputMedio = document.getElementById('vsa-medio');
-  var divTotal = document.getElementById('vsa-total');
-
-  function calcTotal(){
-    var total = (Number(inputCant.value)||0) * (Number(inputPrec.value)||0);
-    divTotal.textContent = formatoMoneda(total);
-    return total;
-  }
-  function verificar(){
-    var doc = inputDoc.value.trim();
-    var docValido = /^\d{8}$/.test(doc) || /^\d{11}$/.test(doc);
-    btnVSA.disabled = !(docValido && inputNombre.value.trim() && inputProd.value && Number(inputCant.value)>0 && Number(inputPrec.value)>0 && inputMedio.value);
-  }
-
-  inputDoc.addEventListener('input', function(){
-    var v = /^\d{8}$/.test(this.value) || /^\d{11}$/.test(this.value);
-    var w = this.closest('.caja-campo');
-    if(this.value && !v) w.classList.add('campo-invalido'); else w.classList.remove('campo-invalido');
-    verificar();
-  });
-  inputNombre.addEventListener('input', verificar);
-  inputProd.addEventListener('change', verificar);
-  inputCant.addEventListener('input', function(){ calcTotal(); verificar(); });
-  inputPrec.addEventListener('input', function(){ calcTotal(); verificar(); });
-  inputMedio.addEventListener('change', verificar);
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    var total = calcTotal();
-    var nroComprobante = generarComprobante();
-    var nuevo = {
-      id: generarIdMovimiento(),
-      fecha: '02/09/2026 ' + new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),
-      paciente: inputNombre.value.trim(),
-      dni: inputDoc.value,
-      concepto: 'Farmacia',
-      monto: total,
-      medioPago: inputMedio.value,
-      comprobante: nroComprobante,
-      estado: 'Pagado',
-      usuario: CAJA_ACTUAL.usuario
-    };
-    MOVIMIENTOS_CAJA.push(nuevo);
-    mostrarToast('Venta sin admision emitida: ' + formatoMoneda(total) + ' -- ' + nuevo.paciente + ' (' + nroComprobante + ')');
-    form.reset();
-    divTotal.textContent = 'S/ 0.00';
-    btnVSA.disabled = true;
-    barraEstado.textContent = nuevo.id + ' venta emitida correctamente';
-  });
-  barraEstado.textContent = 'Caja > Venta Sin Admision';
-}
-
-function renderNotaCredito(menuPadre){
-  var vista = document.getElementById('vista-seccion');
-  if(!CAJA_ACTUAL.abierta){
-    vista.innerHTML = '<div class="caja-vista"><div class="migaja">Caja <b>/ Consumo</b></div><div class="caja-form-panel caja-vacio"><div class="caja-vacio-icono">⚠</div><h4>No hay caja abierta</h4><p>Apertura una caja primero.</p><button class="btn-primario" id="ir-apertura-nc">Ir a Apertura</button></div></div>';
-    document.getElementById('ir-apertura-nc').addEventListener('click',function(){ renderCajaSeccion('Apertura',menuPadre); });
-    return;
-  }
-  var pagosRegistrados = MOVIMIENTOS_CAJA.filter(function(m){ return m.estado === 'Pagado'; });
-  var opcionesPagos = pagosRegistrados.map(function(m){ return '<option value="'+m.id+'">'+m.id+' - '+m.paciente+' - '+formatoMoneda(m.monto)+' ('+m.concepto+')</option>'; }).join('');
-  vista.innerHTML = '<div class="caja-vista"><div class="migaja">Caja <b>/ '+menuPadre+' / Nota De Credito</b></div><div class="caja-titulo"><div><h3>Nota de Credito</h3><p>Anula un pago registrado y emite una nota de credito asociada.</p></div></div><div class="caja-info">● Caja abierta: '+CAJA_ACTUAL.caja+'</div><form class="caja-form-panel" id="form-nota-credito"><div class="caja-form-grid"><div class="caja-campo col-12"><label for="nc-comprobante">Comprobante a anular *</label><select id="nc-comprobante" required><option value="">Seleccionar comprobante</option>'+opcionesPagos+'</select><span class="campo-mensaje">Selecciona el comprobante que deseas anular</span></div><div class="caja-campo col-12" id="nc-detalle-pago" style="display:none"></div><div class="caja-campo col-12"><label for="nc-motivo">Motivo de anulacion *</label><textarea id="nc-motivo" rows="3" style="width:100%;padding:10px;border:1px solid #cbd8e4;border-radius:7px;font-size:12px;resize:vertical" placeholder="Describe el motivo de la anulacion..." required></textarea><span class="campo-mensaje">El motivo es obligatorio</span></div></div><div class="caja-form-actions"><button type="submit" class="btn-primario" id="btn-nc" disabled>Emitir Nota de Credito</button></div></form></div>';
-
-  var form = document.getElementById('form-nota-credito');
-  var selectComprobante = document.getElementById('nc-comprobante');
-  var textareaMotivo = document.getElementById('nc-motivo');
-  var btnNC = document.getElementById('btn-nc');
-  var divDetalle = document.getElementById('nc-detalle-pago');
-
-  selectComprobante.addEventListener('change', function(){
-    var w = this.closest('.caja-campo');
-    if(this.value){ w.classList.remove('campo-invalido'); } else { w.classList.add('campo-invalido'); }
-    if(this.value){
-      var pago = MOVIMIENTOS_CAJA.find(function(m){ return m.id === selectComprobante.value; });
-      if(pago){
-        divDetalle.style.display = '';
-        divDetalle.innerHTML = '<div class="pago-resumen"><div class="pago-resumen-item"><span>Paciente</span><strong>'+pago.paciente+'</strong></div><div class="pago-resumen-item"><span>Monto</span><strong>'+formatoMoneda(pago.monto)+'</strong></div><div class="pago-resumen-item"><span>Concepto</span><strong>'+pago.concepto+'</strong></div></div>';
-      }
-    } else {
-      divDetalle.style.display = 'none';
-    }
-    btnNC.disabled = !(selectComprobante.value && textareaMotivo.value.trim());
-  });
-
-  textareaMotivo.addEventListener('input', function(){
-    var w = this.closest('.caja-campo');
-    if(this.value.trim()) w.classList.remove('campo-invalido'); else w.classList.add('campo-invalido');
-    btnNC.disabled = !(selectComprobante.value && textareaMotivo.value.trim());
-  });
-
-  form.addEventListener('submit', function(e){
-    e.preventDefault();
-    if(!selectComprobante.value || !textareaMotivo.value.trim()) return;
-    var pago = MOVIMIENTOS_CAJA.find(function(m){ return m.id === selectComprobante.value; });
-    if(!pago) return;
-    pago.estado = 'Anulado';
-    var nc = {
-      id: generarIdMovimiento(),
-      fecha: '02/09/2026 ' + new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),
-      paciente: pago.paciente,
-      dni: pago.dni,
-      concepto: 'Nota Credito - ' + pago.concepto,
-      monto: pago.monto * -1,
-      medioPago: pago.medioPago,
-      comprobante: 'NC-' + generarComprobante(),
-      estado: 'Pagado',
-      usuario: CAJA_ACTUAL.usuario
-    };
-    MOVIMIENTOS_CAJA.push(nc);
-    mostrarToast('Nota de credito emitida: ' + formatoMoneda(pago.monto) + ' -- ' + pago.paciente + ' (comprobante original: ' + pago.comprobante + ')', 'info');
-    barraEstado.textContent = nc.id + ' nota de credito emitida correctamente';
-    form.reset();
-    divDetalle.style.display = 'none';
-    btnNC.disabled = true;
-    document.querySelectorAll('#form-nota-credito .campo-invalido').forEach(function(el){ el.classList.remove('campo-invalido'); });
-  });
-  barraEstado.textContent = 'Caja > Nota De Credito';
-}
-
-function renderComprobantesCaja(menuPadre){
-  const comprobantes=[
-    ['AMBULATORIO','CONSULTA','20605508384','MEDICAL ASSISTEM S.A.C.','20100210909','LA POSITIVA SEGUROS Y REASEGUROS S.A.','COLQUE MANUELO TERESA','11482','F002-00010853','2026-09-03','2026-10-18','45','475','75.86','13.65','89.51','MCACERES','EMITIDO','PENDIENTE','01'],
-    ['AMBULATORIO','CONSULTA','20605508384','MEDICAL ASSISTEM S.A.C.','20100210909','LA POSITIVA SEGUROS Y REASEGUROS S.A.','PEREZ COLQUE LUZ KATTY','11483','F002-00010852','2026-09-03','2026-10-18','45','475','75.86','13.65','89.51','MCACERES','EMITIDO','PENDIENTE','01'],
-    ['AMBULATORIO','CONSULTA','20605508384','MEDICAL ASSISTEM S.A.C.','72353398','LA POSITIVA SEGUROS Y REASEGUROS S.A.','MONTELLANOS MURILLO DIEGO ALONSO','12250','B002-00014627','2026-09-03','—','—','523','169.49','30.51','200.00','IHUAMAN','EMITIDO','PENDIENTE','03']
-  ];
-  const columnas=['TIPO CUENTA','TIPO ATENCIÓN','RUC EMISOR','RAZÓN SOCIAL EMISOR','N° DOCUMENTO','CLIENTE','PACIENTE','CUENTA','COMPROBANTE','FECHA EMISIÓN','FECHA VENCIMIENTO','DÍAS CRÉDITO','CIERRE CAJA','BASE','IGV','TOTAL','USUARIO','ESTADO','ESTADO SUNAT','TIPO COMPROBANTE'];
-  const vista=document.getElementById('vista-seccion');
-  vista.innerHTML=`<div class="caja-vista comprobantes-vista"><div class="migaja">Caja <b>/ ${menuPadre} / Comprobantes</b></div><div class="caja-titulo"><div><h3>Comprobantes Emitidos</h3><p>Consulta los comprobantes emitidos por caja y estado SUNAT.</p></div></div><div class="caja-form-panel comprobantes-filtros"><div class="caja-form-grid"><div class="caja-campo col-3"><label for="comprobante-desde">Desde</label><input id="comprobante-desde" type="date" value="2026-09-03"></div><div class="caja-campo col-3"><label for="comprobante-hasta">Hasta</label><input id="comprobante-hasta" type="date" value="2026-09-03"></div><div class="caja-campo col-3"><label for="comprobante-estado">Estado</label><select id="comprobante-estado"><option>Todos</option><option>Emitido</option><option>Anulado</option></select></div><div class="caja-campo col-3"><label for="comprobante-sunat">Estado SUNAT</label><select id="comprobante-sunat"><option>Todos</option><option>Pendiente</option><option>Aceptado</option></select></div><div class="caja-campo col-12"><label for="buscar-comprobante">Buscar comprobante, cliente o paciente</label><input id="buscar-comprobante" type="search" placeholder="Buscar por N° comprobante, cliente, RUC/DNI o cuenta..."></div></div><div class="caja-form-actions"><button class="btn-secundario" id="limpiar-comprobantes">Limpiar filtros</button><button class="btn-primario" id="consultar-comprobantes">🔎 Consultar</button><button class="btn-secundario" id="exportar-comprobantes">▣ Exportar Excel</button></div><div class="crud-count" id="contador-comprobantes">1–${comprobantes.length} de 19 comprobantes</div></div><div class="caja-form-panel comprobantes-tabla-panel"><div class="caja-tabla-wrap"><table class="caja-tabla comprobantes-tabla" id="tabla-comprobantes"><thead><tr>${columnas.map(col=>`<th>${col}</th>`).join('')}<th>IMPRIMIR</th></tr></thead><tbody>${comprobantes.map(fila=>`<tr>${fila.map(c=>`<td>${c}</td>`).join('')}<td><button class="btn-icono" title="Imprimir comprobante" aria-label="Imprimir comprobante">▣</button></td></tr>`).join('')}</tbody></table></div></div></div>`;
-  const buscar=document.getElementById('buscar-comprobante');
-  buscar.addEventListener('input',e=>document.querySelectorAll('#tabla-comprobantes tbody tr').forEach(fila=>fila.style.display=fila.textContent.toLowerCase().includes(e.target.value.toLowerCase())?'':'none'));
-  document.getElementById('limpiar-comprobantes').addEventListener('click',()=>{buscar.value='';document.getElementById('comprobante-estado').value='Todos';document.getElementById('comprobante-sunat').value='Todos';document.querySelectorAll('#tabla-comprobantes tbody tr').forEach(fila=>fila.style.display='');barraEstado.textContent='Filtros de comprobantes limpiados (demo).';});
-  document.getElementById('consultar-comprobantes').addEventListener('click',()=>{barraEstado.textContent='Consulta de comprobantes realizada correctamente (demo).';});
-  document.getElementById('exportar-comprobantes').addEventListener('click',()=>{barraEstado.textContent='Exportación Excel de comprobantes preparada (demo).';});
-  barraEstado.textContent='Caja › Comprobante › Comprobantes';
 }
 
 function renderHistoriaClinica(menuPadre){
@@ -2104,8 +1487,8 @@ function abrirModalCrud(seccion, indice, alGuardar){
 function renderDetalle(m){
   renderNav(m.id);
 
-  if(m.id === 'admision' || m.id === 'caja' || m.id === 'emergencia' || m.id === 'hospitalizacion' || m.id === 'farmacia' || m.id === 'logistica' || m.id === 'quirurgico' || m.id === 'prequirurgico' || m.id === 'facturacion' || m.id === 'sig' || m.id === 'laboratorio' || m.id === 'honorarios'){
-    const menus = m.id === 'caja' ? MENU_CAJA : m.id === 'emergencia' ? MENU_EMERGENCIA : m.id === 'hospitalizacion' ? MENU_HOSPITALIZACION : m.id === 'logistica' ? MENU_LOGISTICA : m.id === 'quirurgico' ? MENU_QUIRURGICO : m.id === 'prequirurgico' ? MENU_PREQUIRURGICO : m.id === 'facturacion' ? MENU_FACTURACION : m.id === 'sig' ? MENU_SIG : m.id === 'laboratorio' ? MENU_LABORATORIO : m.id === 'honorarios' ? MENU_HONORARIOS : MENU_ADMISION;
+  if(m.id === 'admision' || m.id === 'caja' || m.id === 'emergencia' || m.id === 'hospitalizacion' || m.id === 'farmacia' || m.id === 'logistica' || m.id === 'quirurgico' || m.id === 'prequirurgico' || m.id === 'facturacion' || m.id === 'sig'){
+    const menus = m.id === 'caja' ? MENU_CAJA : m.id === 'emergencia' ? MENU_EMERGENCIA : m.id === 'hospitalizacion' ? MENU_HOSPITALIZACION : m.id === 'logistica' ? MENU_LOGISTICA : m.id === 'quirurgico' ? MENU_QUIRURGICO : m.id === 'prequirurgico' ? MENU_PREQUIRURGICO : m.id === 'facturacion' ? MENU_FACTURACION : m.id === 'sig' ? MENU_SIG : MENU_ADMISION;
     contenido.innerHTML = `
       <div class="panel-detalle">
         <div class="panel-header">
